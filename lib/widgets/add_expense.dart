@@ -12,6 +12,20 @@ class _AddExpenseState extends State<AddExpense> {
   final titleInput = TextEditingController();
   final amountInput = TextEditingController();
 
+  void presetDatePicker() {
+    final now = DateTime.now();
+    //setting firstDate one year back,
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+
+    //Showing built-in date picker widget 
+    showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
+  }
+
   //always dispose the controller inputs
   //as it don't automatically destroy and remain through out the app life cycle
   @override
@@ -35,14 +49,37 @@ class _AddExpenseState extends State<AddExpense> {
               label: Text('Title'),
             ),
           ),
-          TextField(
-            controller: amountInput,
-            maxLength: 10,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              prefixText: '\$ ',
-              label: Text('Amount'),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: amountInput,
+                  maxLength: 10,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: '\$ ',
+                    label: Text('Amount'),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('Select Date'),
+                    IconButton(
+                      // alignment: Alignment.topRight,
+                      onPressed: () {
+                        presetDatePicker();
+                      },
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
