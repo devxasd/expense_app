@@ -10,12 +10,14 @@ class AddExpense extends StatefulWidget {
 
 class _AddExpenseState extends State<AddExpense> {
   final titleInput = TextEditingController();
+  final amountInput = TextEditingController();
 
   //always dispose the controller inputs
   //as it don't automatically destroy and remain through out the app life cycle
   @override
   void dispose() {
     titleInput.dispose();
+    amountInput.dispose();
     super.dispose();
   }
 
@@ -33,20 +35,38 @@ class _AddExpenseState extends State<AddExpense> {
               label: Text('Title'),
             ),
           ),
+          TextField(
+            controller: amountInput,
+            maxLength: 10,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              prefixText: '\$ ',
+              label: Text('Amount'),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
                 onPressed: () {
-                  titleInput.text = '';
+                  //to pop the current overlay widget
+                  Navigator.pop(context);
                 },
-                child: const Text('Reset'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.redAccent,
+                ),
+                child: const Text(
+                  'Cancel',
+                ),
               ),
               const SizedBox(
                 width: 20,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  print(titleInput.text);
+                  print(amountInput.text);
+                },
                 child: const Text('Add'),
               ),
             ],
