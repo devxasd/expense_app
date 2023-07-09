@@ -26,6 +26,21 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void addExpenseOverlay() {
+    //context is automatically added by flutter
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const Text('data'),
+      constraints: const BoxConstraints(
+        minHeight: 200,
+        minWidth: double.infinity,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -33,7 +48,7 @@ class _ExpensesState extends State<Expenses> {
           title: const Text('Expense Tracker App'),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: addExpenseOverlay,
               icon: const Icon(Icons.add),
             ),
           ],
