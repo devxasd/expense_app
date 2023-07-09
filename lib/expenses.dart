@@ -29,8 +29,18 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(context) {
     return Scaffold(
-        body: ExpensesList(
-      expenses: _registeredExpenses,
+        body: Column(
+      children: [
+        const Text('Chart'),
+        //As ListView doesn't show anything in existing list of Column []
+        //As it doesnt know the size of inner list
+        //That's why use Expanded
+        Expanded(
+          child: ExpensesList(
+            expenses: _registeredExpenses,
+          ),
+        ),
+      ],
     ));
   }
 }
