@@ -18,23 +18,24 @@ class _AddExpenseState extends State<AddExpense> {
   //? telling that value can be null
   DateTime? selectedDate;
 
-  void presetDatePicker() async {
+  void presetDatePicker() {
     final now = DateTime.now();
     //setting firstDate one year back,
     final firstDate = DateTime(now.year - 1, now.month, now.day);
 
     //Showing built-in date picker widget
     //await is used to get future values
-    final pickedDate = await showDatePicker(
+    showDatePicker( 
       context: context,
       initialDate: now,
       firstDate: firstDate,
       lastDate: now,
-    ); //it does not go to next line until await is over
-
-    setState(() {
-      selectedDate = pickedDate;
-    });
+    ).then((value) { //use of then which means after running above picker it will pas value
+      //updating state
+      setState(() {
+        selectedDate = value;
+      });
+    }); //it does not go to next line until await is over
   }
 
   //always dispose the controller inputs
