@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/add_expense.dart';
 import 'package:expense_app/widgets/expenses/expenses_list.dart';
 import 'package:expense_app/models/expense.dart';
 import 'package:flutter/material.dart';
@@ -27,16 +28,13 @@ class _ExpensesState extends State<Expenses> {
   ];
 
   void addExpenseOverlay() {
-    //context is automatically added by flutter
     showModalBottomSheet(
+      //context is automatically added by flutter
       context: context,
-      builder: (ctx) => const Text('data'),
-      constraints: const BoxConstraints(
-        minHeight: 200,
-        minWidth: double.infinity,
-      ),
+      builder: (ctx) => const AddExpense(),
+
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
       ),
     );
   }
